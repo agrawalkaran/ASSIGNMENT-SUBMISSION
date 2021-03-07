@@ -93,9 +93,12 @@ def register():
 		password = request.form.get('password')
 		confirm_password = request.form.get('confirm_password')
 		secure_password = bcrypt.generate_password_hash(password).decode('utf-8')
-		entry = Register(name=name,email = email,Enrollment = Enrollment,Gender = Gender,birth= birth,contact=contact,semester = semester,city = city,state = state,Address = Address,pincode = pincode,password = secure_password,confirm_password=secure_password)
-		db.session.add(entry)
-		db.session.commit()
+		cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor) 
+		cursor.execute('INSERT INTO register (name,email,Enrollment,Gender,birth,contact,semester,city,state,Address,pincode,password,confirm_password) VALUES ( % s, % s, % s, % s, % s, % s, % s, % s, % s,% s, % s, % s, % s)', (name,email,Enrollment,Gender,birth,contact,semester,city,state,Address,pincode,secure_password,secure_password,))
+		#entry = Register(name=name,email = email,Enrollment = Enrollment,Gender = Gender,birth= birth,contact=contact,semester = semester,city = city,state = state,Address = Address,pincode = pincode,password = secure_password,confirm_password=secure_password)
+		#db.session.add(entry)
+		#db.session.commit()
+		mysql.connection.commit()
 		mail.send_message('New message from Student Assignment Submission Portal' ,
                           sender='studentassignmentportal12@gmail.com',
                           recipients =[email] ,
