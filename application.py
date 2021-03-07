@@ -98,12 +98,6 @@ def register():
 		#entry = Register(name=name,email = email,Enrollment = Enrollment,Gender = Gender,birth= birth,contact=contact,semester = semester,city = city,state = state,Address = Address,pincode = pincode,password = secure_password,confirm_password=secure_password)
 		#db.session.add(entry)
 		#db.session.commit()
-		mysql.connection.commit()
-		mail.send_message('New message from Student Assignment Submission Portal' ,
-                          sender='studentassignmentportal12@gmail.com',
-                          recipients =[email] ,
-                           body ="Thanks For Registering Us:" + name + "\n"  +  Enrollment + "\n" + contact
-                          )
 		flash(f'Account created for {form.email.data}!', 'success')
 		return redirect(url_for('register'))
 	return render_template('register.html', title='Register', form=form)
