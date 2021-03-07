@@ -21,7 +21,7 @@ application.config.update(
     MAIL_PASSWORD=  '181267174'
 )
 mail = Mail(application)
-application.config["SQLALCHEMY_DATABASE_URI"] = 'mysql://admin:admin123@databasedemo.cbgc16okl3ap.us-east-1.rds.amazonaws.com:3306/student'
+application.config["SQLALCHEMY_DATABASE_URI"] = 'mysql+mysqlconnector://admin:admin123@databasedemo.cbgc16okl3ap.us-east-1.rds.amazonaws.com:3306/student'.format(user='admin', password='admin123', server='databasedemo.cbgc16okl3ap.us-east-1.rds.amazonaws.com', database='student')
 application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 application.config['MYSQL_HOST'] = 'databasedemo.cbgc16okl3ap.us-east-1.rds.amazonaws.com'
 application.config['MYSQL_USER'] = 'admin'
@@ -93,11 +93,11 @@ def register():
 		password = request.form.get('password')
 		confirm_password = request.form.get('confirm_password')
 		secure_password = bcrypt.generate_password_hash(password).decode('utf-8')
-		cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor) 
-		cursor.execute('INSERT INTO register (name,email,Enrollment,Gender,birth,contact,semester,city,state,Address,pincode,password,confirm_password) VALUES ( % s, % s, % s, % s, % s, % s, % s, % s, % s,% s, % s, % s, % s)', (name,email,Enrollment,Gender,birth,contact,semester,city,state,Address,pincode,secure_password,secure_password,))
-		#entry = Register(name=name,email = email,Enrollment = Enrollment,Gender = Gender,birth= birth,contact=contact,semester = semester,city = city,state = state,Address = Address,pincode = pincode,password = secure_password,confirm_password=secure_password)
-		#db.session.add(entry)
-		#db.session.commit()
+		#cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor) 
+		#cursor.execute('INSERT INTO register (name,email,Enrollment,Gender,birth,contact,semester,city,state,Address,pincode,password,confirm_password) VALUES ( % s, % s, % s, % s, % s, % s, % s, % s, % s,% s, % s, % s, % s)', (name,email,Enrollment,Gender,birth,contact,semester,city,state,Address,pincode,secure_password,secure_password,))
+		entry = Register(name=name,email = email,Enrollment = Enrollment,Gender = Gender,birth= birth,contact=contact,semester = semester,city = city,state = state,Address = Address,pincode = pincode,password = secure_password,confirm_password=secure_password)
+		db.session.add(entry)
+		db.session.commit()
 		flash(f'Account created for {form.email.data}!', 'success')
 		return redirect(url_for('register'))
 	return render_template('register.html', title='Register', form=form)
