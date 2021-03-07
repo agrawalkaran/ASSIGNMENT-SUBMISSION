@@ -21,11 +21,11 @@ application.config.update(
     MAIL_PASSWORD=  '181267174'
 )
 mail = Mail(application)
-application.config["SQLALCHEMY_DATABASE_URI"] = 'mysql+mysqlconnector://root:@localhost/student'.format(user='root', password='', server='localhost', database='student')
+application.config["SQLALCHEMY_DATABASE_URI"] = 'mysql+mysqlconnector://admin:admin123@databasedemo.cbgc16okl3ap.us-east-1.rds.amazonaws.com/student'.format(user='admin', password='admin123', server='databasedemo.cbgc16okl3ap.us-east-1.rds.amazonaws.com', database='student')
 application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
-application.config['MYSQL_HOST'] = 'localhost'
-application.config['MYSQL_USER'] = 'root'
-application.config['MYSQL_PASSWORD'] = ''
+application.config['MYSQL_HOST'] = 'databasedemo.cbgc16okl3ap.us-east-1.rds.amazonaws.com'
+application.config['MYSQL_USER'] = 'admin'
+application.config['MYSQL_PASSWORD'] = 'admin123'
 application.config['MYSQL_DB'] = 'student'
 application.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 mysql = MySQL(application) 
