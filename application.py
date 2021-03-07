@@ -21,7 +21,7 @@ application.config.update(
     MAIL_PASSWORD=  '181267174'
 )
 mail = Mail(application)
-application.config["SQLALCHEMY_DATABASE_URI"] = 'mysql+mysqlconnector://admin:admin123@databasedemo.cbgc16okl3ap.us-east-1.rds.amazonaws.com/student'.format(user='admin', password='admin123', server='databasedemo.cbgc16okl3ap.us-east-1.rds.amazonaws.com', database='student')
+application.config["SQLALCHEMY_DATABASE_URI"] = 'mysql://admin:admin123@databasedemo.cbgc16okl3ap.us-east-1.rds.amazonaws.com/student'.format(user='admin', password='admin123', server='databasedemo.cbgc16okl3ap.us-east-1.rds.amazonaws.com', database='student')
 application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 application.config['MYSQL_HOST'] = 'databasedemo.cbgc16okl3ap.us-east-1.rds.amazonaws.com'
 application.config['MYSQL_USER'] = 'admin'
