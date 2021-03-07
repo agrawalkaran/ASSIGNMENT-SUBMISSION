@@ -14,7 +14,7 @@ from datetime import datetime, date
 application = Flask(__name__)
 application.config.update(
     MAIL_SERVER = 'smtp.gmail.com',
-    MAIL_PORT = '3306',
+    MAIL_PORT = '587',
     MAIL_USE_SSL = True,
     MAIL_USE_TLS = False,
     MAIL_USERNAME = 'studentassignmentportal12@gmail.com',
