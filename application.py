@@ -14,9 +14,9 @@ from datetime import datetime, date
 application = Flask(__name__)
 application.config.update(
     MAIL_SERVER = 'smtp.gmail.com',
-    MAIL_PORT = '465',
+    MAIL_PORT = '3306',
     MAIL_USE_SSL = True,
-	MAIL_USE_TLS = False,
+    MAIL_USE_TLS = False,
     MAIL_USERNAME = 'studentassignmentportal12@gmail.com',
     MAIL_PASSWORD=  '181267174'
 )
@@ -98,6 +98,11 @@ def register():
 		entry = Register(name=name,email = email,Enrollment = Enrollment,Gender = Gender,birth= birth,contact=contact,semester = semester,city = city,state = state,Address = Address,pincode = pincode,password = secure_password,confirm_password=secure_password)
 		db.session.add(entry)
 		db.session.commit()
+		mail.send_message('New message from Student Assignment Submission Portal' ,
+                          sender='studentassignmentportal12@gmail.com',
+                          recipients =[email] ,
+                           body ="Thanks For Registering Us:" + name + "\n"  +  Enrollment + "\n" + contact
+                          )
 		flash(f'Account created for {form.email.data}!', 'success')
 		return redirect(url_for('register'))
 	return render_template('register.html', title='Register', form=form)
